@@ -44,14 +44,12 @@ class TestMain:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
     def foo():
         """
         Hello world
         """
-'''
-        ],
+'''],
     )
     def test_diff(self, temporary_file, contents):
         """Should produce diff showing changes."""
@@ -70,9 +68,7 @@ class TestMain:
 -        Hello world
 -        """
 +        """Hello world."""
-''' == "\n".join(
-            output_file.getvalue().split("\n")[2:]
-        )
+''' == "\n".join(output_file.getvalue().split("\n")[2:])
 
     @pytest.mark.system
     def test_diff_with_nonexistent_file(self):
@@ -89,14 +85,12 @@ class TestMain:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """
     Hello world
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("diff", [True, False], ids=["show-diff", "no-diff"])
     def test_in_place(self, temporary_file, contents, diff):
@@ -113,13 +107,10 @@ def foo():
             standard_in=None,
         )
         with open(temporary_file) as f:
-            assert (
-                '''\
+            assert '''\
 def foo():
     """Hello world."""
-'''
-                == f.read()
-            )
+''' == f.read()
 
         if diff:
             assert "def foo" in output_file.getvalue()
@@ -129,14 +120,12 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """
     Hello world
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("file_directory", ["temporary_directory"])
     @pytest.mark.parametrize("directory", ["."])
@@ -202,14 +191,12 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''
+        ['''
 def my_function():
     """
 Print my path and return error code
 """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("diff", [True, False], ids=["show-diff", "no-diff"])
     def test_check_mode_incorrect_docstring(self, temporary_file, contents, diff):
@@ -254,14 +241,12 @@ class TestEndToEnd:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
     def foo():
         """
         Hello world
         """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("arguments", [[]])
     def test_end_to_end(
@@ -286,14 +271,12 @@ class TestEndToEnd:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """
     Hello world this is a summary that will get wrapped
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("arguments", [["--wrap-summaries=40"]])
     def test_end_to_end_with_wrapping(
@@ -319,15 +302,13 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Hello world is a long sentence that will not be wrapped because I turned wrapping off.
 
     Hello world is a long sentence that will not be wrapped because I turned wrapping off.
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments", [["--wrap-summaries=0", "--wrap-description=0"]]
@@ -347,8 +328,7 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Hello world is a long sentence that will not
     be wrapped because I turned wrapping off.
@@ -356,8 +336,7 @@ def foo():
     Hello world is a long sentence that will not
     be wrapped because I turned wrapping off.
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments", [["--wrap-summaries=0", "--wrap-description=0"]]
@@ -377,13 +356,11 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Wrapping is off, but it will still add
     the trailing period  """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize("arguments", [["--wrap-summaries=0"]])
     def test_end_to_end_no_wrapping_period(
@@ -407,8 +384,7 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Description from issue #145 that was being improperly wrapped.
 
@@ -416,8 +392,7 @@ def foo():
     .. _arange API: https://numpy.org/doc/stable/reference/generated/numpy.arange.html
     .. _logspace API: https://numpy.org/doc/stable/reference/generated/numpy.logspace.html
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -446,16 +421,14 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Description from issue #150 that was being improperly wrapped.
 
     The text file can be retrieved via the Chrome plugin `Get
     Cookies.txt <https://chrome.google.com/webstore/detail/get-
     cookiestxt/bgaddhkoddajcdgocldbbfleckgcbcid>` while browsing."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -496,8 +469,7 @@ def foo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def create_wix_wrapper(tools, wix_home, bin_install):
     """Create a wrapper around a WiX install.
 
@@ -509,8 +481,7 @@ def create_wix_wrapper(tools, wix_home, bin_install):
         :returns: A valid WiX SDK wrapper. If WiX is not available, and was
             not installed, raises MissingToolError.
     """\
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -553,8 +524,7 @@ def create_wix_wrapper(tools, wix_home, bin_install):
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 def foo():
     """Hello world is a long sentence that will be wrapped at 40 characters because I'm using that option
     - My list item
@@ -562,8 +532,7 @@ def foo():
 
 
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -643,26 +612,17 @@ def foo():
         arguments,
         contents,
     ):
-        result = (
-            run_docformatter.communicate(
-                '''\
+        result = run_docformatter.communicate('''\
 def foo():
 """
 Hello world"""
-'''.encode()
-            )[0]
-            .decode()
-            .replace("\r", "")
-        )
+'''.encode())[0].decode().replace("\r", "")
 
         assert 0 == run_docformatter.returncode
-        assert (
-            '''\
+        assert '''\
 def foo():
 """Hello world."""
-'''
-            == result
-        )
+''' == result
 
     @pytest.mark.system
     @pytest.mark.parametrize(
@@ -697,21 +657,17 @@ class TestEndToEndPyproject:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """ Docstring that should not have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [tool.docformatter]
 pre-summary-space = false
-"""
-        ],
+"""],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -747,21 +703,17 @@ pre-summary-space = false
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """Docstring that should have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                 [tool.docformatter]
                 pre-summary-space = true
-                """
-        ],
+                """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -797,24 +749,20 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """Docstring that should not have a pre-summary newline.
 
     This is a multi-line docstring that should not have a
     newline placed before the summary."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                 [tool.docformatter]
                 pre-summary-newline = false
-                """
-        ],
+                """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -855,24 +803,20 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """Docstring that should have a pre-summary newline.
 
     This is a multi-line docstring that should have a newline
     placed before the summary."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                 [tool.docformatter]
                 pre-summary-newline = true
-                """
-        ],
+                """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -915,22 +859,18 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
     class TestFoo():
         """Really long summary docstring that should not be
         split into a multiline summary."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                     [tool.docformatter]
                     pre-summary-multi-line = false
-                    """
-        ],
+                    """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -968,22 +908,18 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
     class TestFoo():
         """Really long summary docstring that should be
         split into a multiline summary."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                         [tool.docformatter]
                         pre-summary-multi-line = true
-                        """
-        ],
+                        """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1021,25 +957,21 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """Summary docstring that is followed by a description.
 
     This is the description and it shouldn't have a blank line
     inserted after it.
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                         [tool.docformatter]
                         blank = false
-                        """
-        ],
+                        """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1080,25 +1012,21 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """Summary docstring that is followed by a description.
 
     This is the description and it should have a blank line
     inserted after it.
     """
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
             [tool.docformatter]
             blank = true
-            """
-        ],
+            """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1140,22 +1068,18 @@ class TestFoo():
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class foo():
     """Hello world is a long sentence that will be wrapped at 12
     characters because I\'m using that option in pyproject.toml."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
                 [tool.docformatter]
                 wrap-summaries = 12
-                """
-        ],
+                """],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1212,21 +1136,17 @@ class TestEndToEndSetupcfg:
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """ Docstring that should not have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 pre-summary-space = false
-"""
-        ],
+"""],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1262,23 +1182,19 @@ pre-summary-space = false
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """ Docstring that should not have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 in-place = true
 check = false
 diff = false
-"""
-        ],
+"""],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1306,34 +1222,27 @@ diff = false
             run_docformatter.communicate()[0].decode().replace("\r", "").split("\n")[2:]
         )
         with open(temporary_file, "r") as f:
-            assert (
-                f.read()
-                == '''\
+            assert f.read() == '''\
 class TestFoo():
     """Docstring that should not have a pre-summary space."""
 '''
-            )
 
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """ Docstring that should not have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 in-place = true
 check = true
 diff = false
-"""
-        ],
+"""],
     )
     @pytest.mark.parametrize(
         "arguments",
@@ -1364,22 +1273,18 @@ diff = false
     @pytest.mark.system
     @pytest.mark.parametrize(
         "contents",
-        [
-            '''\
+        ['''\
 class TestFoo():
     """ Docstring that should not have a pre-summary space."""
-'''
-        ],
+'''],
     )
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 check = true
 diff = true
-"""
-        ],
+"""],
     )
     @pytest.mark.parametrize(
         "arguments",

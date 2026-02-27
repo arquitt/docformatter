@@ -27,7 +27,6 @@
 # SOFTWARE.
 """Module for testing utility functions used when processing docstrings."""
 
-
 # Standard Library Imports
 import contextlib
 import sys

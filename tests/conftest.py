@@ -111,11 +111,14 @@ def run_docformatter(arguments, temporary_file):
             "--branch",
             "--parallel",
             "--omit=*/site-packages/*",
-            os.environ["VIRTUAL_ENV"] + "/bin/docformatter",
+            "-m",
+            "docformatter",
         ]
     else:
         DOCFORMATTER_COMMAND = [
-            os.environ["VIRTUAL_ENV"] + "/bin/docformatter",
+            sys.executable,
+            "-m",
+            "docformatter",
         ]  # pragma: no cover
 
     if "-" not in arguments:

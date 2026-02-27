@@ -27,7 +27,6 @@
 # SOFTWARE.
 """Module for testing the Formatter _do_format_docstring method."""
 
-
 # Standard Library Imports
 import contextlib
 import itertools

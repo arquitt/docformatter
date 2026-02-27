@@ -395,11 +395,9 @@ class TestConfigurater:
     @pytest.mark.order(1)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [tool.docformatter]
-"""
-        ],
+"""],
     )
     def test_black_defaults(
         self,
@@ -426,13 +424,11 @@ class TestConfigurater:
     @pytest.mark.order(2)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [tool.docformatter]
 black = true
 wrap-summaries = 80
-    """
-        ],
+    """],
     )
     def test_black_from_pyproject(
         self,
@@ -464,13 +460,11 @@ wrap-summaries = 80
     @pytest.mark.order(2)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 black = True
 wrap-descriptions = 80
-"""
-        ],
+"""],
     )
     def test_black_from_setup_cfg(
         self,
@@ -502,15 +496,13 @@ wrap-descriptions = 80
     @pytest.mark.order(2)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [tool.docformatter]
 check = true
 diff = true
 recursive = true
 exclude = ["src/", "tests/"]
-"""
-        ],
+"""],
     )
     def test_exclude_from_pyproject_toml(
         self,
@@ -547,15 +539,13 @@ exclude = ["src/", "tests/"]
     @pytest.mark.order(2)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 check = true
 diff = true
 recursive = true
 exclude = ["src/", "tests/"]
-"""
-        ],
+"""],
     )
     def test_exclude_from_setup_cfg(
         self,
@@ -614,15 +604,13 @@ exclude = ["src/", "tests/"]
     @pytest.mark.order(0)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [tool.docformatter]
 check = true
 diff = true
 recursive = true
 non-cap = ["qBittorrent", "iPad", "iOS", "eBay"]
-"""
-        ],
+"""],
     )
     def test_non_cap_from_pyproject_toml(
         self,
@@ -659,15 +647,13 @@ non-cap = ["qBittorrent", "iPad", "iOS", "eBay"]
     @pytest.mark.order(0)
     @pytest.mark.parametrize(
         "config",
-        [
-            """\
+        ["""\
 [docformatter]
 check = true
 diff = true
 recursive = true
 non-cap = ["qBittorrent", "iPad", "iOS", "eBay"]
-"""
-        ],
+"""],
     )
     def test_non_cap_from_setup_cfg(
         self,
